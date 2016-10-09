@@ -1,0 +1,7 @@
+[package]
+name = "libfornix"
+version = "0.1.0"
+authors = ["Rene Eichhorn <rene.eichhorn@mni.thm.de>"]
+
+[dependencies]
+rand = "0.3"
