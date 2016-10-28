@@ -6,14 +6,18 @@ mod util;
 pub use memory::*;
 pub use util::*;
 
+pub use std::slice::Iter;
+
 /// A form of an intelligent program that is able to execute something
 pub trait IntelligentProgram {
     /// mutably executes the program
     /// might modify itself or adjust internal memory
-    fn mut_execute(&mut self, input: &ProgramInputs) -> ProgramOutputs;
+    fn execute_mut(&mut self, input: &ProgramInputs) -> Option<ProgramOutputs> {
+        self.execute(input)
+    }
 
     /// executed the program, without changing it's state
-    fn execute(&self, input: &ProgramInputs) -> ProgramOutputs;
+    fn execute(&self, input: &ProgramInputs) -> Option<ProgramOutputs>;
 }
 
 /// Manages multiple program inputs
@@ -51,6 +55,10 @@ impl ProgramInputs {
     /// Returns the input at given location
     pub fn get(&self, i: usize) -> &Box<ProgramInput> {
         &self.list[i]
+    }
+
+    pub fn iter(&self) -> Iter<Box<ProgramInput>> {
+        self.iter()
     }
 }
 
